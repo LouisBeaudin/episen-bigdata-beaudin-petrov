@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.7.RELEASE</version>
+        <relativePath/>
+    </parent>
+    <groupId>KnowMeBetter</groupId>
+    <artifactId>KnowMeBetter</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.17</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.17</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>ma.glasnost.orika</groupId>
+            <artifactId>orika-core</artifactId>
+            <version>1.5.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.social</groupId>
+            <artifactId>spring-social-twitter</artifactId>
+            <version>1.1.0.RELEASE</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.twitter4j/twitter4j-core -->
+        <dependency>
+            <groupId>org.twitter4j</groupId>
+            <artifactId>twitter4j-core</artifactId>
+            <version>4.0.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>1.7.6</version>
+
+                <configuration>
+                    <nodeVersion>v10.16.2</nodeVersion>
+                    <workingDirectory>src/main/demo-ui</workingDirectory>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>install node and npm</id>
+                        <goals>
+                            <goal>install-node-and-npm</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                    </execution>
+
+                    <execution>
+                        <id>npm install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                    </execution>
+
+                    <execution>
+                        <id>npm run build</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <arguments>run build</arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-frontend-app</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/demo-ui/dist/demo-ui</directory>
+                                    <filtering>true</filtering>
+                                    <excludes>
+                                        <exclude>fontawesome-webfont.eot</exclude>
+                                        <exclude>fontawesome-webfont.svg</exclude>
+                                        <exclude>fontawesome-webfont.ttf</exclude>
+                                        <exclude>fontawesome-webfont.woff</exclude>
+                                        <exclude>fontawesome-webfont.woff2</exclude>
+                                    </excludes>
+                                </resource>
+                                <resource>
+                                    <directory>src/main/demo-ui/dist/demo-ui</directory>
+                                    <filtering>false</filtering>
+                                    <includes>
+                                        <include>fontawesome-webfont.eot</include>
+                                        <include>fontawesome-webfont.svg</include>
+                                        <include>fontawesome-webfont.ttf</include>
+                                        <include>fontawesome-webfont.woff</include>
+                                        <include>fontawesome-webfont.woff2</include>
+                                    </includes>
+                                </resource>
+                                <resource>
+                                    <directory>src/main/resources/fonts</directory>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${basedir}/target/classes/static</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--            <plugin>-->
+            <!--                <groupId>cz.habarta.typescript-generator</groupId>-->
+            <!--                <artifactId>typescript-generator-maven-plugin</artifactId>-->
+            <!--                <version>2.8.449</version>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <id>generate</id>-->
+            <!--                        <goals>-->
+            <!--                            <goal>generate</goal>-->
+            <!--                        </goals>-->
+            <!--                        <phase>process-classes</phase>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--                <configuration>-->
+            <!--                    <jsonLibrary>jackson2</jsonLibrary>-->
+            <!--                    <classPaterns>-->
+            <!--                        <pattern>com.lifetech.application.dto.**DTO</pattern>-->
+            <!--                    </classPaterns>-->
+            <!--                    <customTypeMappings>-->
+            <!--                        <mapping>java.sql.Timestamp:Date</mapping>-->
+            <!--                    </customTypeMappings>-->
+            <!--                    <mapEnum>asEnum</mapEnum>-->
+            <!--                    <stringQuotes>singleQuotes</stringQuotes>-->
+            <!--                    <outputFile>target/rest.d.ts</outputFile>-->
+            <!--                    <outputKind>module</outputKind>-->
+            <!--                    <noFileComment>true</noFileComment>-->
+            <!--                    <sortDeclarations>true</sortDeclarations>-->
+            <!--                </configuration>-->
+            <!--            </plugin>-->
+        </plugins>
+    </build>
+
+</project>
