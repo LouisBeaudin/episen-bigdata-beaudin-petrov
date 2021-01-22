@@ -23,4 +23,9 @@ public class DataController extends RestBaseController {
     private void jointure() throws IOException, InvalidFormatException {
         dataManager.jointure();
     }
+
+    @GetMapping("top")
+    private void top() throws IOException, InvalidFormatException {
+        dataManager.top();
+    }
 }

@@ -5,15 +5,15 @@ import javax.persistence.Entity;
 import java.sql.Timestamp;
 
 @Entity
-public class Author extends PersistableElement{
+public class Author3 extends PersistableElement{
 
     @Column(name = "name")
     private String name;
 
-    public Author() {
+    public Author3() {
     }
 
-    public Author(String name) {
+    public Author3(String name) {
         this.name = name;
     }
 

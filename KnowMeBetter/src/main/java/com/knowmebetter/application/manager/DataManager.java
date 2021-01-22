@@ -8,4 +8,6 @@ public interface DataManager {
     void formatdata() throws IOException, InvalidFormatException;
 
     void jointure()  throws IOException, InvalidFormatException;
+
+    void top() throws IOException, InvalidFormatException;
 }
